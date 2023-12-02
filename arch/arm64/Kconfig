@@ -1676,3 +1676,7 @@ config AF_NOISE_ELIMINATION
 	default n
 	help
 	Enable it only for produts that suffering AF resonance noise.
+
+source "arch/arm64/hotplug/autosmp/Kconfig"
+
+source "arch/arm64/hotplug/alucard/Kconfig"
