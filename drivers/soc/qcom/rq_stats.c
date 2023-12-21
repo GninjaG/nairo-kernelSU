@@ -115,3 +115,21 @@ static int __init msm_rq_stats_init(void)
 	return ret;
 }
 late_initcall(msm_rq_stats_init);
+
+#ifdef CONFIG_BRICKED_HOTPLUG
+unsigned int get_rq_info(void)
+{
+	unsigned long flags = 0;
+	unsigned int rq = 0;
+
+	spin_lock_irqsave(&rq_lock, flags);
+
+	rq = rq_info.rq_avg;
+	rq_info.rq_avg = 0;
+
+	spin_unlock_irqrestore(&rq_lock, flags);
+
+	return rq;
+}
+EXPORT_SYMBOL(get_rq_info);
+#endif
